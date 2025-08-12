@@ -146,10 +146,10 @@ export default function ChatApp(): JSX.Element {
       <Row>
         <Col>
           <Card
+            className="shadow-lg border-0"
             style={{
               height: 450,
               borderRadius: 12,
-              boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
               overflow: "hidden",
             }}
           >
@@ -230,9 +230,10 @@ export default function ChatApp(): JSX.Element {
       {/* Input Form */}
       <Row className="mt-3">
         <Col>
-          <Form onSubmit={handleSend}>
-            <InputGroup>
+          <Form onSubmit={handleSend} className="shadow-lg border-0">
+            <InputGroup style={{ borderRadius: 12 }}>
               <Form.Control
+                className="shadow-lg border-0"
                 placeholder="What do you want to ask..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
