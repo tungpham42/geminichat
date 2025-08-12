@@ -19,6 +19,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Role = "user" | "assistant" | "system";
 
@@ -199,7 +200,9 @@ export default function ChatApp(): JSX.Element {
                         style={{ whiteSpace: "pre-wrap" }}
                       >
                         {m.role === "assistant" ? (
-                          <ReactMarkdown>{m.text}</ReactMarkdown>
+                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {m.text}
+                          </ReactMarkdown>
                         ) : (
                           m.text
                         )}
