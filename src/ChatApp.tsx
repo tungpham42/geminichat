@@ -9,7 +9,7 @@ import {
   ListGroup,
   InputGroup,
   Spinner,
-  Badge,
+  Card,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -40,7 +40,7 @@ export default function ChatApp(): JSX.Element {
             {
               id: "m-system",
               role: "system",
-              text: "Bạn đang nói chuyện với AI (GenAI).",
+              text: "You are talking with AI (GenAI).",
               createdAt: Date.now(),
             },
           ];
@@ -49,7 +49,7 @@ export default function ChatApp(): JSX.Element {
         {
           id: "m-system",
           role: "system",
-          text: "Bạn đang nói chuyện với AI (GenAI).",
+          text: "You are talking with AI (GenAI).",
           createdAt: Date.now(),
         },
       ];
@@ -130,49 +130,52 @@ export default function ChatApp(): JSX.Element {
 
   return (
     <Container style={{ maxWidth: 900, marginTop: 24 }}>
-      <Row>
+      {/* Header */}
+      <Row className="mb-3 text-center">
         <Col>
-          <h3>
-            <FontAwesomeIcon icon={faRobot} /> AI Chat Bot
-            <Badge bg="secondary" style={{ marginLeft: 8 }}>
-              GenAI
-            </Badge>
+          <h3 className="fw-bold">
+            <FontAwesomeIcon icon={faRobot} className="me-2 text-primary" />
+            AI Chatbot
           </h3>
-          <p className="text-muted">
-            React + TypeScript + React Bootstrap + FontAwesome, calling a
-            Netlify serverless function that uses @google/genai.
-          </p>
         </Col>
       </Row>
 
+      {/* Chat Messages */}
       <Row>
         <Col>
-          <div
-            ref={listRef}
+          <Card
             style={{
-              height: 400,
-              overflowY: "auto",
-              border: "1px solid #eee",
-              borderRadius: 8,
-              padding: 12,
+              height: 450,
+              borderRadius: 12,
+              boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
+              overflow: "hidden",
             }}
           >
-            <ListGroup variant="flush">
-              {messages.map((m) => (
-                <ListGroup.Item
-                  key={m.id}
-                  className={m.role === "user" ? "text-end" : ""}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent:
-                        m.role === "user" ? "flex-end" : "flex-start",
-                      gap: 8,
-                    }}
+            <Card.Body
+              ref={listRef}
+              style={{
+                overflowY: "auto",
+                background: "linear-gradient(to bottom, #f8f9fa, #ffffff)",
+                padding: "12px",
+              }}
+            >
+              <ListGroup variant="flush">
+                {messages.map((m) => (
+                  <ListGroup.Item
+                    key={m.id}
+                    className={`border-0 ${
+                      m.role === "user" ? "text-end" : ""
+                    }`}
+                    style={{ background: "transparent" }}
                   >
-                    <div style={{ maxWidth: "75%" }}>
-                      <div style={{ fontSize: 12, color: "#666" }}>
+                    <div
+                      style={{
+                        display: "inline-block",
+                        maxWidth: "75%",
+                        textAlign: m.role === "user" ? "right" : "left",
+                      }}
+                    >
+                      <div className="small text-muted mb-1">
                         {m.role === "user" ? (
                           <>
                             <FontAwesomeIcon icon={faUser} /> You
@@ -182,36 +185,47 @@ export default function ChatApp(): JSX.Element {
                             <FontAwesomeIcon icon={faRobot} /> AI
                           </>
                         )}
-                        <span style={{ marginLeft: 8, fontSize: 11 }}>
+                        <span className="ms-2">
                           {new Date(m.createdAt).toLocaleTimeString()}
                         </span>
                       </div>
                       <div
-                        style={{
-                          marginTop: 6,
-                          whiteSpace: "pre-wrap",
-                          background: m.role === "user" ? "#e9f7ff" : "#f8f9fa",
-                          padding: 10,
-                          borderRadius: 6,
-                        }}
+                        className={`p-2 rounded shadow-sm ${
+                          m.role === "user"
+                            ? "bg-primary text-white"
+                            : "bg-light text-dark"
+                        }`}
+                        style={{ whiteSpace: "pre-wrap" }}
                       >
                         {m.text}
                       </div>
                     </div>
-                  </div>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
-          </div>
+                  </ListGroup.Item>
+                ))}
+
+                {/* Typing Indicator */}
+                {isSending && (
+                  <ListGroup.Item className="border-0">
+                    <div className="typing-indicator">
+                      <div className="typing-dot"></div>
+                      <div className="typing-dot"></div>
+                      <div className="typing-dot"></div>
+                    </div>
+                  </ListGroup.Item>
+                )}
+              </ListGroup>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
 
-      <Row style={{ marginTop: 12 }}>
+      {/* Input Form */}
+      <Row className="mt-3">
         <Col>
           <Form onSubmit={handleSend}>
             <InputGroup>
               <Form.Control
-                placeholder="Nhập câu hỏi của bạn..."
+                placeholder="What do you want to ask..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
@@ -236,21 +250,12 @@ export default function ChatApp(): JSX.Element {
                 variant="outline-danger"
                 onClick={clearHistory}
                 title="Clear history"
-                style={{ marginLeft: 8 }}
+                className="ms-2"
               >
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
             </InputGroup>
           </Form>
-        </Col>
-      </Row>
-
-      <Row style={{ marginTop: 16 }}>
-        <Col className="text-muted">
-          <small>
-            This frontend never stores API keys. Requests go through a Netlify
-            serverless function that calls @google/genai.
-          </small>
         </Col>
       </Row>
     </Container>
