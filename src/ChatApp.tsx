@@ -18,6 +18,7 @@ import {
   faUser,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import ReactMarkdown from "react-markdown";
 
 type Role = "user" | "assistant" | "system";
 
@@ -197,7 +198,11 @@ export default function ChatApp(): JSX.Element {
                         }`}
                         style={{ whiteSpace: "pre-wrap" }}
                       >
-                        {m.text}
+                        {m.role === "assistant" ? (
+                          <ReactMarkdown>{m.text}</ReactMarkdown>
+                        ) : (
+                          m.text
+                        )}
                       </div>
                     </div>
                   </ListGroup.Item>
