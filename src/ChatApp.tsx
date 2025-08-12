@@ -41,7 +41,7 @@ export default function ChatApp(): JSX.Element {
             {
               id: "m-system",
               role: "system",
-              text: "You are talking with AI (GenAI).",
+              text: "You are talking with AI.",
               createdAt: Date.now(),
             },
           ];
@@ -50,7 +50,7 @@ export default function ChatApp(): JSX.Element {
         {
           id: "m-system",
           role: "system",
-          text: "You are talking with AI (GenAI).",
+          text: "You are talking with AI.",
           createdAt: Date.now(),
         },
       ];
@@ -130,7 +130,7 @@ export default function ChatApp(): JSX.Element {
   }
 
   return (
-    <Container style={{ maxWidth: 900, marginTop: 24 }}>
+    <Container className="mt-5" style={{ maxWidth: "900px" }}>
       {/* Header */}
       <Row className="mb-3 text-center">
         <Col>
