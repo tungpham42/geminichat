@@ -230,7 +230,11 @@ export default function ChatApp(): JSX.Element {
       {/* Input Form */}
       <Row className="mt-3">
         <Col>
-          <Form onSubmit={handleSend} className="shadow-lg border-0">
+          <Form
+            onSubmit={handleSend}
+            className="shadow-lg border-0"
+            style={{ borderRadius: 12 }}
+          >
             <InputGroup style={{ borderRadius: 12 }}>
               <Form.Control
                 className="shadow-lg border-0"
@@ -243,6 +247,7 @@ export default function ChatApp(): JSX.Element {
                 as="textarea"
                 rows={2}
                 disabled={isSending}
+                style={{ borderTopLeftRadius: 12, borderBottomLeftRadius: 12 }}
               />
               <Button variant="primary" type="submit" disabled={isSending}>
                 {isSending ? (
@@ -259,6 +264,10 @@ export default function ChatApp(): JSX.Element {
                 variant="danger"
                 onClick={clearHistory}
                 title="Clear history"
+                style={{
+                  borderTopRightRadius: 12,
+                  borderBottomRightRadius: 12,
+                }}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
