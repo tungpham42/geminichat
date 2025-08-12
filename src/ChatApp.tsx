@@ -252,10 +252,9 @@ export default function ChatApp(): JSX.Element {
                 )}
               </Button>
               <Button
-                variant="outline-danger"
+                variant="danger"
                 onClick={clearHistory}
                 title="Clear history"
-                className="ms-2"
               >
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
