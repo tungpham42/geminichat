@@ -17,10 +17,13 @@ const handler: Handler = async (event) => {
 
     const { messages } = JSON.parse(event.body);
 
-    const contents = messages.map((m: any) => ({
-      role: m.role,
-      parts: [{ text: m.content }],
-    }));
+    const contents = messages
+      // remove system messages or convert them into a user instruction
+      .filter((m: any) => m.role !== "system")
+      .map((m: any) => ({
+        role: m.role === "assistant" ? "model" : m.role, // convert assistant → model
+        parts: [{ text: m.content }],
+      }));
 
     const result = await ai.models.generateContent({
       model: process.env.GENAI_MODEL || "gemini-2.0-flash-001",
