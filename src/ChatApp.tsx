@@ -243,7 +243,7 @@ export default function ChatApp(): JSX.Element {
               <Button variant="primary" type="submit" disabled={isSending}>
                 {isSending ? (
                   <>
-                    <Spinner animation="border" size="sm" /> Sending
+                    <Spinner animation="border" size="sm" /> Thinking
                   </>
                 ) : (
                   <>
