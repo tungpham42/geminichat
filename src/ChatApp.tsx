@@ -86,7 +86,6 @@ export default function ChatApp(): JSX.Element {
     setIsSending(true);
 
     try {
-      // POST to Netlify serverless function
       const res = await fetch("/.netlify/functions/genai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

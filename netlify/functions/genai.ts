@@ -2,7 +2,7 @@ import { Handler } from "@netlify/functions";
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY!, // store in Netlify environment variables
+  apiKey: process.env.GEMINI_API_KEY!,
 });
 
 const handler: Handler = async (event) => {
@@ -17,11 +17,11 @@ const handler: Handler = async (event) => {
 
     const { messages } = JSON.parse(event.body);
 
+    // Filter and map roles for Gemini
     const contents = messages
-      // remove system messages or convert them into a user instruction
       .filter((m: any) => m.role !== "system")
       .map((m: any) => ({
-        role: m.role === "assistant" ? "model" : m.role, // convert assistant → model
+        role: m.role === "assistant" ? "model" : m.role,
         parts: [{ text: m.content }],
       }));
 
