@@ -102,3 +102,115 @@ code {
     transform: translateY(-10px); /* Move up during animation */
   }
 }
+
+table {
+  border-collapse: separate; /* Use separate borders for rounded corners */
+  width: 100%;
+  margin: 1.5em 0; /* Increased margin for emphasis */
+  font-family: "Open Sans", sans-serif; /* Modern font */
+  font-size: 1em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+  border-spacing: 0; /* Important for border-radius to work correctly */
+  border: none; /* Remove default table border */
+}
+
+/* Table Header Styles (Modernized) */
+thead {
+  background: linear-gradient(
+    to right,
+    #4caf50,
+    #8bc34a
+  ); /* Gradient background */
+  color: white;
+  text-align: left;
+  font-weight: 600; /* Semi-bold font */
+  border-bottom: none; /* Remove header border */
+  border-radius: 8px 8px 0 0; /* Rounded corners for the header */
+  overflow: hidden; /* Needed to clip the rounded corners */
+}
+
+th,
+td {
+  padding: 1em 1.25em; /* Increased padding */
+  border-bottom: 1px solid #eee; /* Lighter border */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); /* Subtle text shadow */
+}
+
+th {
+  text-transform: uppercase; /* Capitalize header text */
+  letter-spacing: 0.05em; /* Add some letter spacing */
+}
+
+/* Even/Odd Row Styling (More Distinctive) */
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Hover Effect (Animated) */
+tbody tr:hover {
+  background-color: #e8f5e9; /* Lighter green on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increased shadow on hover */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth animation */
+  cursor: pointer;
+}
+
+/* First and Last Child Styling for Rounded Corners */
+tbody tr:first-child td:first-child {
+  border-top-left-radius: 8px;
+}
+
+tbody tr:first-child td:last-child {
+  border-top-right-radius: 8px;
+}
+
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* Responsive Table Styling (Mobile - Modified for Consistency) */
+@media screen and (max-width: 768px) {
+  /* Increased breakpoint */
+  table {
+    border: none;
+    box-shadow: none; /* Remove shadow on mobile */
+    margin: 0; /* Remove margin on mobile */
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 1em;
+    display: block;
+    border-bottom: 2px solid #ddd;
+    border-radius: 8px; /* Rounded corners on mobile rows */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Re-add shadow on mobile rows */
+    overflow: hidden; /* Clip rounded corners */
+  }
+
+  td {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    border-bottom: 1px dotted #ccc;
+    padding: 0.75em;
+  }
+
+  td:last-child {
+    border-bottom: none; /* Remove bottom border from last cell */
+  }
+
+  td::before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #555; /* Darker color for mobile headers */
+  }
+}
