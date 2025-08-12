@@ -215,9 +215,9 @@ export default function ChatApp(): JSX.Element {
                 {isSending && (
                   <ListGroup.Item className="border-0">
                     <div className="typing-indicator">
-                      <div className="typing-dot"></div>
-                      <div className="typing-dot"></div>
-                      <div className="typing-dot"></div>
+                      <span className="dot dot-1"></span>
+                      <span className="dot dot-2"></span>
+                      <span className="dot dot-3"></span>
                     </div>
                   </ListGroup.Item>
                 )}
